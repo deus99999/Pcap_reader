@@ -23,12 +23,14 @@ for DataItem in root.childNodes:
                     continue
 
                 if DataItemFormat.nodeName == "Fixed":
-                     print(DataItemFormat.nodeName)
+                     print("DataItemFormat: ", DataItemFormat.nodeName)
                      Fixed = DataItemFormat
+                     length = Fixed.getAttribute("length")
+                     print("length:", length)
                      for Bits in Fixed.childNodes:
                          if type(Bits) is not Element:
                              continue
-
+                         BitsPresence = ""
                          BitsShortName = ""
                          BitsName = ""
                          for Bit in Bits.childNodes:
@@ -38,10 +40,14 @@ for DataItem in root.childNodes:
 
                                 for text in Bit.childNodes:
                                     BitsShortName = text.nodeValue
-                                    print(BitsShortName)
+                                    print("BitsShortName: ", BitsShortName)
 
                              if Bit.nodeName == "BitsName":
-                                  BitsName = text.nodeValue
+                                 for text in Bit.childNodes:
+                                      BitsName = text.nodeValue
+                                      print("BitsName: ", BitsName)
+                         if BitsShortName == "spare":
+                            BitsPresence = "-1"
                     # VariableId += 1
 
 

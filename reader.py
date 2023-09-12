@@ -10,7 +10,7 @@ with open('cat_62_dump.pcap', 'rb') as pcap_file:
             try:
                 data = eth.ip.udp.data
                 print("Data:", data)
-                hexdata = ":".join("{:02x}".format(ord(c)) for c in str(data))
+                # hexdata = ":".join("{:02x}".format(ord(c)) for c in str(data))
                 #print(f'Parsing packet: {hexdata}')
 
 
