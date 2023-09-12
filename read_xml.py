@@ -16,25 +16,25 @@ def get_length():
     item_dict = (json["Category"]["DataItem"])
 
     byte_length = []
-
+    lst = []
     for item in item_dict:
         data_item_format = item["DataItemFormat"]
-        print(data_item_format)
-
+        #print(data_item_format)
+        lst.append(data_item_format)
         if 'Variable' in data_item_format:
             fixed = data_item_format['Variable']['Fixed']
             if isinstance(fixed, dict):
                 length = fixed['@length']
-                print('___ ', length)
+               # print('___ ', length)
                 byte_length.append(length)
             if isinstance(fixed, list):
                 length = fixed[0]['@length']
-                print("=== ", length)
+               # print("=== ", length)
                 byte_length.append(length)
 
         if 'Fixed' in data_item_format:
             length = data_item_format['Fixed']['@length']
-            print("%%% ", length)
+           # print("%%% ", length)
             byte_length.append(length)
 
         if 'Compound' in data_item_format:
@@ -44,11 +44,11 @@ def get_length():
                 fixed = variable['Fixed']
                 if isinstance(fixed, dict):
                     length = fixed['@length']
-                    print("--- ", length)
+                   # print("--- ", length)
                     byte_length.append(length)
                 if isinstance(fixed, list):
                     length = fixed[0]['@length']
-                    print("--- ", length)
+                   # print("--- ", length)
                     byte_length.append(length)
 
             if isinstance(variable, list):
@@ -56,7 +56,7 @@ def get_length():
                 if isinstance(fixed, dict):
                     length = fixed['Fixed']
                     length = length[0]['@length']
-                    print("---- ", length)
+                   # print("---- ", length)
                     byte_length.append(length)
 
         if 'Explicit' in data_item_format:
@@ -66,17 +66,15 @@ def get_length():
                 variable = compound['Variable']
                 fixed = variable['Fixed']
                 length = fixed['@length']
-                print("... ", length)
+                #print("... ", length)
                 byte_length.append(length)
 
             if 'Fixed' in ixplicit:
                 fixed = ixplicit['Fixed']
                 length = fixed['@length']
-                print('+++ ', length)
+                #print('+++ ', length)
                 byte_length.append(length)
-
-    print(len(byte_length))
-    print(byte_length)
+    #print(lst)
     return byte_length
 
 get_length()
