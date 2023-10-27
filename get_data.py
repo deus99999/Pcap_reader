@@ -3,7 +3,7 @@ from reader import read_pcap
 
 # data_frame = pd.json_normalize(read_pcap())
 
-
+print(read_pcap())
 class GetData:
     def __init__(self, frame):
         self.frame = frame
@@ -11,7 +11,14 @@ class GetData:
     def get_position(self):
         while True:
             data_frame = pd.json_normalize(read_pcap())[['100.X', '100.Y', '136.MFL']]
+            # data_frame = pd.Series(['100.X', '100.Y', '136.MFL'])
             return data_frame
+
+    def get_correlated(self):
+        """В контексте навигации "коррелированные координаты" могут относиться к системе координат, которая согласована
+        с глобальной системой координат, например, географическими координатами широты и долготы."""
+        data_frame = pd.json_normalize(read_pcap())[['105.Lat', '105.Lon']]
+        return data_frame
 
         # lst = []
         # x = self.frame.loc[0, '100.X']
